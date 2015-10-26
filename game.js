@@ -1,6 +1,7 @@
 var CANVAS_X = 640;
 var CANVAS_Y = 480;
 var FPS = 30;
+var TO_RADIANS = Math.PI/180;
 
 var context = document.getElementById('canvasId').getContext("2d");
 var start = false;
@@ -19,6 +20,7 @@ function Bug(svg_file, posX, posY, sizeX, sizeY, onReady) {
 	this.onReady = onReady;
 	this.image.onload = onReady; //function() { this.onReady() };
 	this.image.src = svg_file;
+	this.rotation = 0;
 }
 
 Bug.prototype.move = function(x, y) {
@@ -27,7 +29,17 @@ Bug.prototype.move = function(x, y) {
 }
 
 Bug.prototype.draw = function(context) {
-	context.drawImage(this.image, this.posX, this.posY, this.sizeX, this.sizeY);
+	context.save();
+	context.translate(this.posX, this.posY);
+	context.translate(this.sizeX/2, this.sizeY/2);
+	context.rotate(this.rotation * TO_RADIANS);
+	context.drawImage(this.image, -this.sizeX/2, -this.sizeY/2, this.sizeX, this.sizeY);
+	context.restore();
+}
+
+Bug.prototype.rotate = function(degrees) {
+	this.rotation += degrees;
+	console.log("degrees = " + this.rotation);
 }
 
 var redraw = function redraw() {
@@ -38,7 +50,8 @@ var redraw = function redraw() {
 
 	for (i in bugs) {
 		bugs[i].draw(context);
-		bugs[i].move(2, 0);
+		bugs[i].move(2, 1);
+		bugs[i].rotate(5);
 	}
 
 }
