@@ -22,8 +22,8 @@ var redraw = function redraw() {
 }
 
 var doStuff = function doStuff() {
-        context.canvas.width = CANVAS_X;
-        context.canvas.height= CANVAS_Y;
+	context.canvas.width = CANVAS_X;
+	context.canvas.height= CANVAS_Y;
 
 	bugs.push(new Bug("bug1.svg", 200, 200, 50, 60, redraw));
 }
