@@ -7,6 +7,17 @@ var context = document.getElementById('canvasId').getContext("2d");
 var start = false;
 var bugs = [];
 
+function Box(posX, posY, sizeX, sizeY, rotation) {
+	this.pos = {x:posX, y:posY};
+	this.size = {x:sizeX, y:sizeY};
+	this.rotation = rotation;
+}
+
+Box.prototype.copy = function() {
+	return new Box(this.pos.x, this.pos.y, this.size.x, this.size.y, this.rotation);
+}
+
+
 /*
  * Self-drawing bug object
  * TODO: Split into layers
