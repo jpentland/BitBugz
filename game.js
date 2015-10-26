@@ -7,9 +7,11 @@ var context = document.getElementById('canvasId').getContext("2d");
  * Self-drawing bug object 
  * TODO: Split into layers
  */
-function Bug(svg_file, posX, posY, onReady) {
+function Bug(svg_file, posX, posY, sizeX, sizeY, onReady) {
 	this.posX = posX;
 	this.posY = posY;
+	this.sizeX = sizeX;
+	this.sizeY = sizeY;
 	this.image = new Image();
 	this.onReady = onReady;
 	this.image.onload = onReady; //function() { this.onReady() };
@@ -22,7 +24,7 @@ Bug.prototype.move = function(x, y) {
 }
 
 Bug.prototype.draw = function(context) {
-	context.drawImage(this.image, this.posX, this.posY);
+	context.drawImage(this.image, this.posX, this.posY, this.sizeX, this.sizeY);
 }
 
 var drawImage = function drawImage(name, x, y) {
