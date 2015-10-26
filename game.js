@@ -37,18 +37,22 @@ Bug.prototype.draw = function(context) {
 	context.restore();
 }
 
+Bug.prototype.clear = function(context) {
+	context.clearRect(this.posX, this.posY, this.sizeX, this.sizeY);
+}
+
 Bug.prototype.rotate = function(degrees) {
 	this.rotation += degrees;
-	console.log("degrees = " + this.rotation);
 }
 
 var redraw = function redraw() {
 
-	context.canvas.width = context.canvas.width; // Clear canvas
+	requestAnimationFrame(redraw);
 
         context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
 
 	for (i in bugs) {
+		bugs[i].clear(context);
 		bugs[i].draw(context);
 		bugs[i].move(2, 1);
 		bugs[i].rotate(5);
@@ -60,8 +64,7 @@ var doStuff = function doStuff() {
         context.canvas.width = CANVAS_X;
         context.canvas.height= CANVAS_Y;
 
-
-	bugs.push(new Bug("bug1.svg", 10, 10, 100, 110, function() { setInterval(redraw, 1000/FPS) }));
+	bugs.push(new Bug("bug1.svg", 10, 10, 100, 110, redraw));
 }
 
 window.onload = doStuff;
