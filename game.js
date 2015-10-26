@@ -92,7 +92,7 @@ var doStuff = function doStuff() {
         context.canvas.width = CANVAS_X;
         context.canvas.height= CANVAS_Y;
 
-	bugs.push(new Bug("bug1.svg", 10, 10, 100, 110, redraw));
+	bugs.push(new Bug("bug1.svg", 10, 10, 50, 60, redraw));
 }
 
 window.onload = doStuff;
