@@ -13,8 +13,8 @@ var redraw = function redraw() {
 	for (i in bugs) {
 		bugs[i].clear(context);
 		bugs[i].draw(context);
-		bugs[i].move(2, 1);
-		bugs[i].rotate(5);
+		bugs[i].rotate(1);
+		bugs[i].moveForward(2);
 	}
 
 	context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
