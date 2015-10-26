@@ -77,14 +77,14 @@ var redraw = function redraw() {
 
 	requestAnimationFrame(redraw);
 
-        context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
-
 	for (i in bugs) {
 		bugs[i].clear(context);
 		bugs[i].draw(context);
 		bugs[i].move(2, 1);
 		bugs[i].rotate(5);
 	}
+
+	context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
 
 }
 
