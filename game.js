@@ -37,17 +37,36 @@ Bug.prototype.move = function(x, y) {
 	this.box.pos.y += y;
 }
 
-Bug.prototype.draw = function(context) {
+/*
+ * Center context on box so all coordinates are relative to
+ * the center of where the object should be drawn. Also
+ * allows for rotation.
+ */
+Bug.prototype.withBox = function(context, box, func) {
 	context.save();
-	context.translate(this.posX, this.posY);
-	context.translate(this.sizeX/2, this.sizeY/2);
-	context.rotate(this.rotation * TO_RADIANS);
-	context.drawImage(this.image, -this.sizeX/2, -this.sizeY/2, this.sizeX, this.sizeY);
+	context.translate(box.pos.x, box.pos.y);
+	context.translate(box.size.x/2, box.size.y/2);
+	context.rotate(box.rotation * TO_RADIANS);
+	func();
 	context.restore();
 }
 
+Bug.prototype.draw = function(context) {
+	var _this = this;
+	this.withBox(context, this.box, function() {
+		context.drawImage(_this.image,
+						 -_this.box.size.x/2, -_this.box.size.y/2,
+						  _this.box.size.x, _this.box.size.y);
+	});
+}
+
 Bug.prototype.clear = function(context) {
-	context.clearRect(this.posX, this.posY, this.sizeX, this.sizeY);
+	var _this = this;
+	this.withBox(context, this.oldBox, function() {
+		context.clearRect(-_this.oldBox.size.x/2, -_this.oldBox.size.y/2,
+						   _this.oldBox.size.x, _this.oldBox.size.y);
+	});
+	this.oldBox = this.box.copy();
 }
 
 Bug.prototype.rotate = function(degrees) {
