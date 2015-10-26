@@ -1,7 +1,10 @@
 var CANVAS_X = 640;
 var CANVAS_Y = 480;
+var FPS = 30;
 
 var context = document.getElementById('canvasId').getContext("2d");
+var start = false;
+var bugs = [];
 
 /* 
  * Self-drawing bug object 
@@ -27,8 +30,15 @@ Bug.prototype.draw = function(context) {
 	context.drawImage(this.image, this.posX, this.posY, this.sizeX, this.sizeY);
 }
 
-var drawImage = function drawImage(name, x, y) {
-	var bug = new Bug(name, x, y, function() { bug.draw(context) })
+var redraw = function redraw() {
+
+	context.canvas.width = context.canvas.width; // Clear canvas
+
+	for (i in bugs) {
+		bugs[i].draw(context);
+		bugs[i].move(2, 0);
+	}
+
 }
 
 var doStuff = function doStuff() {
@@ -36,7 +46,8 @@ var doStuff = function doStuff() {
         context.canvas.height= CANVAS_Y;
 
         context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
-		drawImage("bug1.svg", 10, 10);
+
+	bugs.push(new Bug("bug1.svg", 10, 10, 100, 110, function() { setInterval(redraw, 1000/FPS) }));
 }
 
 window.onload = doStuff;
