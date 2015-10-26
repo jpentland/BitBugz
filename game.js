@@ -6,8 +6,8 @@ var context = document.getElementById('canvasId').getContext("2d");
 var start = false;
 var bugs = [];
 
-/* 
- * Self-drawing bug object 
+/*
+ * Self-drawing bug object
  * TODO: Split into layers
  */
 function Bug(svg_file, posX, posY, sizeX, sizeY, onReady) {
