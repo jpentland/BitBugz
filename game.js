@@ -3,13 +3,30 @@ var CANVAS_Y = 480;
 
 var context = document.getElementById('canvasId').getContext("2d");
 
-var drawImage = function drawImage(name, x, y) {
+/* 
+ * Self-drawing bug object 
+ * TODO: Split into layers
+ */
+function Bug(svg_file, posX, posY, onReady) {
+	this.posX = posX;
+	this.posY = posY;
+	this.image = new Image();
+	this.onReady = onReady;
+	this.image.onload = onReady; //function() { this.onReady() };
+	this.image.src = svg_file;
+}
 
-  var image = new Image();
-  image.onload = function() {
-        context.drawImage(image, x, y);
-  }
-  image.src = name;
+Bug.prototype.move = function(x, y) {
+	this.posX += x;
+	this.posY += y;
+}
+
+Bug.prototype.draw = function(context) {
+	context.drawImage(this.image, this.posX, this.posY);
+}
+
+var drawImage = function drawImage(name, x, y) {
+	var bug = new Bug(name, x, y, function() { bug.draw(context) })
 }
 
 var doStuff = function doStuff() {
@@ -17,7 +34,7 @@ var doStuff = function doStuff() {
         context.canvas.height= CANVAS_Y;
 
         context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
-        drawImage("http://localhost/BitBugz/bug1.svg", 10, 10);
+		drawImage("bug1.svg", 10, 10);
 }
 
 window.onload = doStuff;
