@@ -34,6 +34,8 @@ var redraw = function redraw() {
 
 	context.canvas.width = context.canvas.width; // Clear canvas
 
+        context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
+
 	for (i in bugs) {
 		bugs[i].draw(context);
 		bugs[i].move(2, 0);
@@ -45,7 +47,6 @@ var doStuff = function doStuff() {
         context.canvas.width = CANVAS_X;
         context.canvas.height= CANVAS_Y;
 
-        context.strokeRect(10,10, CANVAS_X-10, CANVAS_Y-10);
 
 	bugs.push(new Bug("bug1.svg", 10, 10, 100, 110, function() { setInterval(redraw, 1000/FPS) }));
 }
