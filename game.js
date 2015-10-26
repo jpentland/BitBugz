@@ -29,7 +29,7 @@ function Bug(svg_file, posX, posY, sizeX, sizeY, onReady) {
 	this.sizeY = sizeY;
 	this.image = new Image();
 	this.onReady = onReady;
-	this.image.onload = onReady; //function() { this.onReady() };
+	this.image.onload = onReady;
 	this.image.src = svg_file;
 	this.rotation = 0;
 }
