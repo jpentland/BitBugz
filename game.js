@@ -23,20 +23,18 @@ Box.prototype.copy = function() {
  * TODO: Split into layers
  */
 function Bug(svg_file, posX, posY, sizeX, sizeY, onReady) {
-	this.posX = posX;
-	this.posY = posY;
-	this.sizeX = sizeX;
-	this.sizeY = sizeY;
+
+	this.box = new Box(posX, posY, sizeX, sizeY, 0);
+	this.oldBox = this.box.copy();
 	this.image = new Image();
 	this.onReady = onReady;
 	this.image.onload = onReady;
 	this.image.src = svg_file;
-	this.rotation = 0;
 }
 
 Bug.prototype.move = function(x, y) {
-	this.posX += x;
-	this.posY += y;
+	this.box.pos.x += x;
+	this.box.pos.y += y;
 }
 
 Bug.prototype.draw = function(context) {
@@ -53,7 +51,7 @@ Bug.prototype.clear = function(context) {
 }
 
 Bug.prototype.rotate = function(degrees) {
-	this.rotation += degrees;
+	this.box.rotation += degrees;
 }
 
 var redraw = function redraw() {
