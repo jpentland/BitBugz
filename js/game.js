@@ -12,8 +12,13 @@ var redraw = function redraw() {
 
 	for (i in bugs) {
 		bugs[i].clear(context);
+	}
+
+	for (i in bugs) {
+		if (Math.random() < 0.01)
+			bugs[i].dir = -bugs[i].dir;
 		bugs[i].draw(context);
-		bugs[i].rotate(1);
+		bugs[i].rotate(bugs[i].dir);
 		bugs[i].moveForward(2);
 	}
 
@@ -25,7 +30,17 @@ var doStuff = function doStuff() {
 	context.canvas.width = CANVAS_X;
 	context.canvas.height= CANVAS_Y;
 
-	bugs.push(new Bug("bug1.svg", 200, 200, 50, 60, redraw));
+	bugs.push(new Bug("bug1.svg", 500, 500, 50, 60, redraw));
+	bugs[0].dir = 1;
+	bugs.push(new Bug("bug1.svg", 500, 500, 50, 60));
+	bugs[1].dir = 1;
+
+	bugs.push(new Bug("bug1.svg", 500, 500, 50, 60));
+	bugs[2].dir = 1;
+
+	bugs.push(new Bug("bug1.svg", 500, 500, 50, 60));
+	bugs[3].dir = 1;
+
 }
 
 window.onload = doStuff;
