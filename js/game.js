@@ -1,5 +1,5 @@
-var CANVAS_X = 640;
-var CANVAS_Y = 480;
+var CANVAS_X = 640*2;
+var CANVAS_Y = 680;
 var FPS = 30;
 
 var context = document.getElementById('canvasId').getContext("2d");
