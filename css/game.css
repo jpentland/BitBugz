@@ -1,0 +1,11 @@
+body {
+	background-image:
+		url("../img/bg.png");
+	background-repeat:
+		repeat-yx;
+}
+
+.panel-default {
+
+	background-color: #aaaaff
+}
