@@ -38,7 +38,10 @@ var doStuff = function doStuff() {
 				  Math.random()*context.canvas.width,
 				  Math.random()*context.canvas.height,
 				  50, 60,
-				  function() {onBugReady(NUM_BUGS);}));
+				  function() {
+					if (i == NUM_BUGS-1)
+						redraw();
+				  }));
 
 	}
 }
