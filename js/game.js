@@ -14,6 +14,10 @@ var redraw = function redraw() {
 	for (i in bugs) {
 		bug=bugs[i];
 		bug.clear(context);
+	}
+
+	for (i in bugs) {
+		bug=bugs[i];
 		bug.draw(context);
 
 		if (!(bug.box.pos.x < bug.targetx + 10 &&
