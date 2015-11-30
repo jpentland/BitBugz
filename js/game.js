@@ -36,14 +36,14 @@ var redraw = function redraw() {
 var doStuff = function doStuff() {
 	resizeCanvas();
 
-	for (var i=0; i < NUM_BUGS-1; i++) {
+	for (var i=0; i < NUM_BUGS; i++) {
 
 		bugs.push(new Bug("bug1.svg",
 				  Math.random()*context.canvas.width,
 				  Math.random()*context.canvas.height,
 				  50, 60,
 				  function() {
-					if (i == NUM_BUGS-1)
+					if (i == NUM_BUGS)
 						redraw();
 				  }));
 
