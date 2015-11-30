@@ -20,6 +20,7 @@
  */
 
 var TO_RADIANS = Math.PI/180;
+var FROM_RADIANS = 1/TO_RADIANS;
 
 /* Object to store position, size and rotation of a sprite */
 function Box(posX, posY, sizeX, sizeY, rotation) {
@@ -62,8 +63,8 @@ Bug.prototype.draw = function(context) {
 	var _this = this;
 	this.withBox(context, this.box, function() {
 		context.drawImage(_this.image,
-						 -_this.box.size.x/2, -_this.box.size.y/2,
-						  _this.box.size.x, _this.box.size.y);
+				 -_this.box.size.x/2, -_this.box.size.y/2,
+				  _this.box.size.x, _this.box.size.y);
 	});
 }
 
@@ -89,5 +90,13 @@ Bug.prototype.moveForward = function(d) {
 
 Bug.prototype.rotate = function(degrees) {
 	this.box.rotation += degrees;
+}
+
+Bug.prototype.pointTo = function(targetx, targety) {
+	this.box.rotation = 90 + (FROM_RADIANS *
+				Math.atan2(targety - this.box.pos.y,
+				targetx - this.box.pos.x));
+	if(this.box.rotation < 0)
+		this.box.rotation += 360;
 }
 
