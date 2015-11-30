@@ -12,10 +12,15 @@ var redraw = function redraw() {
 	requestAnimationFrame(redraw);
 
 	for (i in bugs) {
-		bugs[i].clear(context);
-		bugs[i].draw(context);
-		bugs[i].rotate(1);
-		bugs[i].moveForward(2);
+		bug=bugs[i];
+		bug.clear(context);
+		bug.draw(context);
+
+		if (!(bug.box.pos.x < bug.targetx + 10 &&
+		      bug.box.pos.x > bug.targetx - 10 &&
+		      bug.box.pos.y < bug.targety + 10 &&
+		      bug.box.pos.y > bug.targety - 10))
+			bugs[i].moveForward(3);
 	}
 
 	context.strokeRect(10,10,
@@ -43,5 +48,11 @@ var resizeCanvas = function resizeCanvas() {
 	context.canvas.width = $("#canvas-panel").width();
 	context.canvas.height= CANVAS_Y;
 }
-window.onload = doStuff;
 
+window.onload = doStuff;
+$("#canvasId").mousemove( function (event) {
+
+	for (i in bugs) {
+		bugs[i].pointTo(event.offsetX, event.offsetY);
+	}
+});
