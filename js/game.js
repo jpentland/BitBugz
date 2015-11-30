@@ -20,7 +20,7 @@ var redraw = function redraw() {
 		      bug.box.pos.x > bug.targetx - 10 &&
 		      bug.box.pos.y < bug.targety + 10 &&
 		      bug.box.pos.y > bug.targety - 10))
-			bugs[i].moveForward(3);
+			bugs[i].moveForward(1);
 	}
 
 	context.strokeRect(10,10,
