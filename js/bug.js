@@ -43,6 +43,8 @@ function Bug(svg_file, posX, posY, sizeX, sizeY, onReady) {
 	this.onReady = onReady;
 	this.image.onload = onReady;
 	this.image.src = svg_file;
+	this.targetx = 0;
+	this.targety = 0;
 }
 
 /*
@@ -98,5 +100,8 @@ Bug.prototype.pointTo = function(targetx, targety) {
 				targetx - this.box.pos.x));
 	if(this.box.rotation < 0)
 		this.box.rotation += 360;
+
+	this.targetx = targetx;
+	this.targety = targety;
 }
 
